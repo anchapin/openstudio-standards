@@ -540,7 +540,11 @@ def export_spreadsheet_to_json(spreadsheet_titles, dataset_type: 'os_stds')
       # Save the objects to the hash
       standards_data[sheet_name] = objs
     end
-
+    json_path = File.expand_path("#{__dir__}/openstudio_standards_acm_schedule_seed.json")
+    File.open(json_path, "w:UTF-8") do |file|
+        file << JSON.pretty_generate(standards_data)
+    end
+  put
 
     filename_out = spreadsheet_title.gsub(/[()]/, '')
     # CSV.open("metadata.csv", "wb") {|csv| headers.to_a.each {|elem| csv << elem} }
